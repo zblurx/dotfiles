@@ -1,0 +1,24 @@
+alias cat='batcat --pager never'
+alias ..='cd ..'
+alias ..2="cd ../.."
+alias ..3="cd ../../.."
+alias ..4="cd ../../../.."
+alias ..5="cd ../../../../.."
+alias cat_original='/usr/bin/cat'
+alias ls='exa'
+alias l='exa -1F'
+alias la='exa -la'
+alias ll='exa -laF'
+alias tea='tee -a'
+alias uncolor='sed -r "s/\x1B\[([0-9]{1,3}(;[0-9]{1,2})?)?[mGK]//g"'
+alias ls_original='/usr/bin/ls'
+alias tmux="tmux -u"
+alias follow="tail -f -n +1"
+alias rm='rm -I --preserve-root'
+alias rmr='rm -rI --preserve-root'
+alias ve='virtualenv -p python3 venv'
+alias va='source ./venv/bin/activate'
+alias myip='ipinfo myip --nocache'
+alias ports='netstat -tunlpa'
+alias less='less -RN --mouse --wheel-lines=3'
+alias toqr='qrencode -o - | feh --force-aliasing -FZ -'
