@@ -65,6 +65,10 @@ bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
+# personal functionnalities
+bindsym $mod+f exec flameshot gui
+bindsym $mod+n exec firefox
+
 # move focused window
 bindsym $mod+Shift+j move left
 bindsym $mod+Shift+k move down
@@ -84,8 +88,11 @@ bindsym $mod+h split h
 bindsym $mod+v split v
 
 # enter fullscreen mode for the focused container
-bindsym $mod+f fullscreen toggle
-bindsym $mod+Shift+f exec flameshot gui
+bindsym $mod+Shift+f fullscreen toggle
+
+bindsym XF86AudioRaiseVolume exec  amixer -q set Master 2dB+ unmute; exec notify-send -t 1000 -u normal Sound $(amixer  get Master | awk -F'[([\])]' '{print $2}' | tr -d "\n")
+bindsym XF86AudioLowerVolume exec amixer -q set Master 2dB- unmute; exec notify-send -t 1000 -u normal Sound $(amixer  get Master | awk -F'[([\])]' '{print $2}' | tr -d "\n")
+bindsym XF86AudioMute exec amixer -q set Master toggle; exec notify-send -t 1000 -u normal Sound $(amixer  get Master | awk -F'[([\])]' '{print $2}' | tr -d "\n")
 
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
@@ -196,6 +203,7 @@ bar {
     }
 }
 
+for_window [class=".*burp-StartBurp.*" title="^ $"] floating enable
+
 exec --no-startup-id feh --randomize --bg-fill ~/Pictures/wallpapers
 exec --no-startup-id picom
-exec --no-startup-id glava --desktop

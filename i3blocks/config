@@ -31,11 +31,10 @@ separator=true
 
 
 [mediaplayer]
-command=playerctl metadata --format "{{ artist }} - {{ title }}"
+command=playerctl -p spotify metadata --format "{{ artist }} - {{ title }}"
 instance=spotify
 interval=2
 signal=10
-label=
 color=#00FF00
 # Volume indicator
 #
