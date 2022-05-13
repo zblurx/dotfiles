@@ -1,0 +1,9 @@
+#!/bin/bash
+
+if [[ "$#" -ne 1 ]]; then
+    echo "Usage: flush <interface name>"
+    exit
+fi
+
+sudo ip addr flush $1
+sudo ip link set $1 down

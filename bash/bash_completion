@@ -1,0 +1,2 @@
+complete -W "\$(ls ~/.wifi/)" wifi
+complete -W "\$(find /sys/class/net/ -mindepth 1 -printf '%f ')" flush

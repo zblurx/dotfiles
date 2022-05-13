@@ -1,0 +1,15 @@
+#!/bin/bash
+
+if [[ "$#" -ne 1 ]]; then
+    echo "Usage: wifi <config file>"
+    exit
+fi
+
+if [[ -f "$HOME/.wifi/$1" ]]; then
+    sudo ip link set wlp58s0 up
+    sudo killall wpa_supplicant
+    sudo wpa_supplicant -B -i wlp58s0 -c "$HOME/.wifi/$1"
+    sudo dhclient wlp58s0
+else
+    echo "Can't open wifi config file $HOME/.wifi/$1"
+fi
