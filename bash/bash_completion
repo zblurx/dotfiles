@@ -1,2 +1,3 @@
 complete -W "\$(ls ~/.wifi/)" wifi
-complete -W "\$(find /sys/class/net/ -mindepth 1 -printf '%f ')" flush
+complete -W "\$(find /sys/class/net/ -mindepth 1 -printf '%f ')" ipup
+complete -W "\$(find /sys/class/net/ -mindepth 1 -printf '%f ')" ipdown
