@@ -1,0 +1,33 @@
+#!/bin/bash
+
+RED='\033[1;31m'
+BLUE='\033[1;34m'
+GREEN='\033[1;32m'
+NOCOLOR='\033[0m'
+
+function prettyecho () {
+    if [[ $1 == "ERROR" ]]; then
+        echo -e "${RED}[*] $2${NOCOLOR}"
+    elif [[ $1 == "SUCCESS" ]]; then
+        echo -e "${GREEN}[*] $2${NOCOLOR}"
+    else 
+        echo -e "${BLUE}[*] $@${NOCOLOR}"
+    fi
+}
+
+if [[ "$#" -ne 1 ]]; then
+    prettyecho 'ERROR' "Usage: disconnect <interface name>"
+    exit 1
+fi
+
+{
+    prettyecho "Flush $1"
+    sudo ip addr flush $1
+    prettyecho "Setting $1 down"
+    sudo ip link set $1 down
+    prettyecho 'SUCCESS' "$1 successfully disconnected!"
+} ||
+{
+    prettyecho 'ERROR' "Error while disconnecting $1"
+    exit 1
+}

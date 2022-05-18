@@ -1,15 +1,43 @@
 #!/bin/bash
 
+RED='\033[1;31m'
+BLUE='\033[1;34m'
+GREEN='\033[1;32m'
+NOCOLOR='\033[0m'
+
+function prettyecho () {
+    if [[ $1 == "ERROR" ]]; then
+        echo -e "${RED}[*] $2${NOCOLOR}"
+    elif [[ $1 == "SUCCESS" ]]; then
+        echo -e "${GREEN}[*] $2${NOCOLOR}"
+    else 
+        echo -e "${BLUE}[*] $@${NOCOLOR}"
+    fi
+}
+
 if [[ "$#" -ne 1 ]]; then
-    echo "Usage: wifi <config file>"
-    exit
+    prettyecho 'ERROR' "Usage: wifi <config file>"
+    exit 1
 fi
 
 if [[ -f "$HOME/.wifi/$1" ]]; then
-    sudo ip link set wlp58s0 up
-    sudo killall wpa_supplicant
-    sudo wpa_supplicant -B -i wlp58s0 -c "$HOME/.wifi/$1"
-    sudo dhclient wlp58s0
+    {
+        prettyecho 'Setting wlp58s0 up'
+        sudo ip link set wlp58s0 up
+        prettyecho 'Canceling any other wifi connection'
+        sudo killall wpa_supplicant
+        prettyecho "Connecting to $1 on wlp58s0"
+        sudo wpa_supplicant -B -i wlp58s0 -c "$HOME/.wifi/$1"
+        prettyecho "Getting DHCP lease on wlp58s0"
+        sudo dhclient -v wlp58s0
+        prettyecho 'SUCCESS' 'Connected!'
+    } ||
+    {
+        prettyecho 'ERROR' "Error while connecting to $1"
+        exit 1
+    }
+
 else
-    echo "Can't open wifi config file $HOME/.wifi/$1"
+    prettyecho 'ERROR' "Can't open wifi config file $HOME/.wifi/$1"
+    exit 1
 fi
