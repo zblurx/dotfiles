@@ -147,8 +147,8 @@ bindsym $mod+Shift+ccedilla move container to workspace number $ws9
 bindsym $mod+Shift+agrave move container to workspace number $ws10
 
 # screen brightness controls (homemade -18)
-bindsym XF86MonBrightnessUp exec --no-startup-id lightup
-bindsym XF86MonBrightnessDown exec --no-startup-id lightdown
+bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl set 5%+
+bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 5%-
 
 # reload the configuration file
 bindsym $mod+Shift+c reload

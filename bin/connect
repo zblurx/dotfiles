@@ -23,12 +23,12 @@ fi
 {
     prettyecho "Flush $1" 
     sudo ip addr flush $1
+    sudo dhclient -r 
     prettyecho "Setting $1 up"
     sudo ip link set $1 up
     prettyecho "Getting DHCP lease on $1"
     sudo dhclient -v $1
-    prettyecho 'SUCCESS' "$1 successfully connected!"
-} || 
+    [ $status -eq 0 ] && prettyecho 'SUCCESS' "$1 successfully connected!" || prettyecho 'ERROR' "$1 not connected"
 {
     prettyecho 'ERROR' "Error while connecting $1"
     exit 1
