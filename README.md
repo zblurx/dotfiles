@@ -19,6 +19,7 @@
 - virtualenv
 - golang
 - docker
+- neovim (https://github.com/NvChad/NvChad)
 
 ## bashrc
 
