@@ -64,7 +64,7 @@ bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
 # personal functionnalities
-bindsym $mod+f exec flameshot gui
+bindsym $mod+f exec sed -i 's/opacity: 0.80/opacity: 1.00/g' $HOME/.dotfiles/alacritty/alacritty.yml && flameshot gui && sed -i 's/opacity: 1.00/opacity: 0.80/g' $HOME/.dotfiles/alacritty/alacritty.yml
 bindsym $mod+n exec firefox
 
 # move focused window
