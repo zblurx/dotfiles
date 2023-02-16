@@ -21,6 +21,5 @@ set convert-meta off
 
 # Hop up directories
 "\C-n":"cd ..\n"
-# Rerun last command as sudo
-"\C-b":"sudo !!\n"
+
 
